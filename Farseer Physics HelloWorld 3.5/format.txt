@@ -1,0 +1,25 @@
+﻿Cell data format
+
+CellType - TexID - SizeX - SizeY - BodyType
+01         0001    08      01      00
+
+CellType (99)
+00 : None
+01 : ForegroundElement
+02 : -
+
+TexID (9999)
+00 : None
+01 : platform-1
+02 : -
+
+Size X - Y (99)
+12 : 12 
+
+BodyType (99)
+* CellType must not be None
+00 : None
+01 : Rectangle
+02 : Circle
+03 : Custom
+
