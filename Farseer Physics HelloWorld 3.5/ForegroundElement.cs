@@ -12,17 +12,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FarseerPhysics.Samples
 {
-    public class ForegroundElement
+    public class ForegroundElement : CellObject
     {
-        public Body Body;
-        private int BodyType;
-        private int TexId;
-
-        public const int BODY_RECT = 1;
-        public const int BODY_CIRCLE = 2;
-        public const int BODY_CUSTOM = 3;
-
-        public void Initialize(int bodyType, int texId, Vector2 position, Vector2 optionals)
+        
+        public override void Initialize(int bodyType, int texId, Vector2 position, Vector2 optionals)
         {
             // Note : position must be in world coords
             //      : optionals are size for rect and params (radius and shizzle) for circle all in world coords
@@ -77,7 +70,7 @@ namespace FarseerPhysics.Samples
          * Drawing Methods
          * 
          * ***********************************/
-        public void Draw()
+        public override void Draw()
         {
             switch (BodyType)
             {
@@ -128,6 +121,11 @@ namespace FarseerPhysics.Samples
                 1f,
                 SpriteEffects.None,
                 0f);
+        }
+
+        public override void Update(float dt)
+        {
+            
         }
     }
 }

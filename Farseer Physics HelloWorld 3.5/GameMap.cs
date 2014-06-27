@@ -129,9 +129,20 @@ namespace FarseerPhysics.Samples
             }
         }
 
-        public void Update()
-        { 
-            
+        public void Update(float dt)
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    MapCell m = Map[y, x];
+
+                    if (m.guid != null)
+                    {
+                        m.Update(dt);
+                    }
+                }
+            }
         }
 
         public List<ForegroundElement> GetFGElementsInAABB(Vector2 center, float width, float height)
@@ -153,9 +164,43 @@ namespace FarseerPhysics.Samples
             {
                 for (int j = startX; j < endX; j++)
                 {
-                    if (Map[i, j].FGElement != null)
+                    
+                    if (Map[i, j].ObjectType == CellObject.OBJ_FOREGROUND && Map[i, j].CellObject != null)
                     {
-                        cells.Add(Map[i, j].FGElement);
+                        cells.Add(Map[i, j].CellObject as ForegroundElement);
+                    }
+                }
+            }
+
+            if (cells.Count == 0)
+                return null;
+
+            return cells;
+        }
+
+        public List<Ledge> GetLedgesInAABB(Vector2 center, float width, float height)
+        {
+            int x = (int)Game1.Camera.ToData(center.X);
+            int y = (int)Game1.Camera.ToData(center.Y);
+            int w = (int)width;
+            int h = (int)height;
+
+            int startY = Height - (y + h); if (startY < 0) startY = 0;
+            int endY = Height - (y - h); if (endY > Height - 1) endY = Height - 1;
+
+            int startX = (x - w > 0) ? x - w : 0;
+            int endX = (x + w < Width - 1) ? x + w : Width - 1;
+
+            List<Ledge> cells = new List<Ledge>();
+
+            for (int i = startY; i < endY; i++)
+            {
+                for (int j = startX; j < endX; j++)
+                {
+
+                    if (Map[i, j].ObjectType == CellObject.OBJ_LEDGE && Map[i, j].CellObject != null)
+                    {
+                        cells.Add(Map[i, j].CellObject as Ledge);
                     }
                 }
             }

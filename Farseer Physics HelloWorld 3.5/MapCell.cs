@@ -17,69 +17,59 @@ namespace FarseerPhysics.Samples
     {
         public Guid guid;
 
-        public ForegroundElement FGElement;
-        int CellType;
-        // public Ledge Ledge
-        // public Destructable Dest;
+        public CellObject CellObject;
+        public int ObjectType;
 
-        public const int CELL_FOREGROUND    = 1;
-        public const int CELL_DESTRUCTABLE  = 2;
-        public const int CELL_LEDGE         = 3;
-
-        public void Initialize(int cellType, int bodyType, int texId, Vector2 position, Vector2 optionals)
+        public void Initialize(int objectType, int bodyType, int texId, Vector2 position, Vector2 optionals)
         { 
             // Note : position must be in world coords
             //      : optionals are size for rect and params (radius and shizzle) for circle all in world coords
 
             guid = Guid.NewGuid();
-            CellType = cellType;
+            ObjectType = objectType;
 
-            switch (CellType)
+            switch (ObjectType)
             {
-                case CELL_FOREGROUND:
+                case CellObject.OBJ_FOREGROUND:
                     CreateForeground(bodyType, texId, position, optionals);
                     break;
-                case CELL_DESTRUCTABLE:
-                    CreateDestructable(texId, position, optionals);
+                case CellObject.OBJ_DESTRUCTABLE:
+                    CreateDestructable(bodyType, texId, position, optionals);
                     break;
-                case CELL_LEDGE:
-                    CreateLedge(texId, position);
+                case CellObject.OBJ_LEDGE:
+                    CreateLedge(bodyType, texId, position, optionals);
                     break;
             }
         }
 
         private void CreateForeground(int bodyType, int texId, Vector2 position, Vector2 size) 
         {
-            FGElement = new ForegroundElement();
-            FGElement.Initialize(bodyType, texId, position, size);
+            CellObject = new ForegroundElement();
+            CellObject.Initialize(bodyType, texId, position, size);
         }
 
-        private void CreateDestructable(int texId, Vector2 position, Vector2 parameters)
+        private void CreateDestructable(int bodyType, int texId, Vector2 position, Vector2 size)
         {
-
+            //CellObject = new ForegroundElement();
+            //CellObject.Initialize(bodyType, texId, position, size);
         }
 
-        private void CreateLedge(int texId, Vector2 position)
+        private void CreateLedge(int bodyType, int texId, Vector2 position, Vector2 size)
         {
-
+            CellObject = new Ledge();
+            CellObject.Initialize(bodyType, texId, position, size);
         }
-
-
 
         public void Draw()
         {
-            switch (CellType)
-            {
-                case CELL_FOREGROUND:
-                    FGElement.Draw();
-                    break;
-                case CELL_LEDGE:
-                    
-                    break;
-                case CELL_DESTRUCTABLE:
-                    
-                    break;
-            }
+            if (CellObject != null)
+                CellObject.Draw();
+        }
+
+        public void Update(float dt)
+        {
+            if (CellObject != null)
+                CellObject.Update(dt);
         }
     }
 }

@@ -109,6 +109,8 @@ namespace FarseerPhysics.Samples
 
             World.Step((float)gameTime.ElapsedGameTime.TotalMilliseconds * 0.001f);
 
+            GameMap.Update((float)gameTime.ElapsedGameTime.TotalMilliseconds * 0.001f);
+
             base.Update(gameTime);
 
             //DEBUG
@@ -134,11 +136,16 @@ namespace FarseerPhysics.Samples
             if (pressedKeys.Length == 0 && Player.State != (int)Player.States.Idle)
                 Player.Stop();
 
-            if (state.IsKeyDown(Keys.Space) && _oldKeyState.IsKeyUp(Keys.Space) && Player.State != (int)Player.States.Jumping)
-                Player.Jump(jumpHelper.GetValue());
-
             if (state.IsKeyDown(Keys.S) && state.IsKeyDown(Keys.Space) && _oldKeyState.IsKeyUp(Keys.Space))
+            {
                 Player.PassThrough();
+            }
+            else if (state.IsKeyDown(Keys.Space) && _oldKeyState.IsKeyUp(Keys.Space) && Player.State != (int)Player.States.Jumping)
+            {
+                Player.Jump(jumpHelper.GetValue());
+            }
+
+
 
             if (state.IsKeyDown(Keys.Escape))
                 Exit();

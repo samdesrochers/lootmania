@@ -6,7 +6,8 @@ CellType - TexID - SizeX - SizeY - BodyType
 CellType (99)
 00 : None
 01 : ForegroundElement
-02 : -
+02 : Destructable
+03 : Ledge
 
 TexID (9999)
 00 : None

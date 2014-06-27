@@ -76,10 +76,10 @@ namespace FarseerPhysics.Samples
 
         public void PassThrough()
         {
-            List<ForegroundElement> fgelements = Game1.GameMap.GetFGElementsInAABB(Body.Position, 3, 2);
-            foreach (ForegroundElement f in fgelements)
+            List<Ledge> ledges = Game1.GameMap.GetLedgesInAABB(Body.Position, 3, 2);
+            foreach (Ledge l in ledges)
             {
-                f.Body.Enabled = false;
+                l.TriggerPassThroughEvent();
             }
         }
     }

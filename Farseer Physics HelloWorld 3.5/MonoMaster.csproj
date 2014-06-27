@@ -50,8 +50,10 @@
     <Compile Include="ForegroundElement.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameMap.cs" />
+    <Compile Include="Ledge.cs" />
     <Compile Include="MapCell.cs" />
     <Compile Include="MapHelper.cs" />
+    <Compile Include="CellObject.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

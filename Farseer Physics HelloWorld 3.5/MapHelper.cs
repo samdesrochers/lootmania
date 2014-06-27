@@ -36,7 +36,7 @@ namespace FarseerPhysics.Samples
             tempMap[0, 12] = "01-0001-08-01-01";
             tempMap[0, 16] = "01-0001-08-01-01";
 
-            tempMap[4, 0] = "01-0001-08-01-01";
+            tempMap[4, 0] = "03-0001-08-01-01";
 
             // Wrtie to file
             file.WriteLine("20-10-DemoMap");
